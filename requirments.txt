@@ -1,0 +1,9 @@
+discord-py-interactions==5.11.0
+discord-typings==0.8.0
+discord.py==2.3.2
+discordwebhook==1.0.3
+python-dotenv==1.0.1
+uvicorn==0.29.0
+fastapi==0.110.1
+rich==13.7.1
+requests==2.31.0
