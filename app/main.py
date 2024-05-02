@@ -45,22 +45,13 @@ async def post_line(text):
     for l_token in LINE_TOKENS:
         line_notify_api = 'https://notify-api.line.me/api/notify'
         headers = {'Authorization': f'Bearer {l_token}'}
-        data = {'message': f'message: {text}'}
+        data = {'message': f'{text}'}
         requests.post(line_notify_api, headers = headers, data = data)
 
 
 @client.event
 async def on_ready():
     logger.info(f'We have logged in as {client.user}')
-
-@client.event
-async def on_messege(messege):
-    logger.info("messege")
-    if messege.author == client.user:
-        return
-    else:
-        await post_line(f"{messege.author}\n{messege.content}")
-        logger.info("messege2")
 
 @client.event
 async def on_voice_state_update(member, before, after):
@@ -124,5 +115,14 @@ async def on_voice_state_update(member, before, after):
                     )
                     await channel.send(embed=embed)
 
-server_thread()
+@client.event
+async def on_message(message):
+    if message.author == client.user:
+        return
+
+    else:
+        await post_line(f"Channel: {message.channel.name}\nUser: {message.author}\n{message.content}")
+
+
+#server_thread()
 client.run(TOKEN)
