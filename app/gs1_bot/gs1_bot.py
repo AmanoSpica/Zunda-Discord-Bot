@@ -120,6 +120,6 @@ def gs1_main():
             return
     
         else:
-            await post_line(f"Channel: {message.channel.name}\nUser: {message.author}\n{message.content}")
+            await post_line(f"Channel: {message.channel.name}\nUser: {message.author.display_name}\n{message.content}")
     
     client.run(TOKEN)
